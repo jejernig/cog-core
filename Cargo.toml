@@ -1,0 +1,30 @@
+[package]
+name = "cog-core"
+version = "0.5.0"
+edition = "2021"
+description = "Cog Engine — AI Coworker middleware for games"
+license = "Apache-2.0"
+repository = "https://github.com/jejernig/cog-core"
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tokio = { version = "1", features = ["full"] }
+reqwest = { version = "0.12", features = ["json", "rustls-tls"], default-features = false }
+rusqlite = { version = "0.32", features = ["bundled"] }
+thiserror = "2"
+uuid = { version = "1", features = ["v4"] }
+petgraph = "0.7"
+tracing = "0.1"
+tracing-subscriber = "0.3"
+async-trait = "0.1"
+
+[lib]
+name = "cog_core"
+crate-type = ["lib", "cdylib", "staticlib"]
+
+[profile.release]
+opt-level = "s"
+lto = true
+codegen-units = 1
+strip = true
